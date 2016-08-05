@@ -13,14 +13,18 @@ var Enemy = function(speed,x,y) {
 
 };
 
+Enemy.checkCollisions = function(){
+
+    if ( player.x - 20  <  this.x && player.x + 20  > this.x &&
+         player.y - 20  <  this.y && player.y + 20  > this.y ){
+         player.resetPosition();
+    }
+
+};
 Enemy.prototype.update = function(dt) {
     this.x  = this.x + ( this.speed * dt );
     // [TODO] handle colision with Player
-    if ( player.x - 20  <  this.x && player.x + 20  > this.x &&
-         player.y - 20  <  this.y && player.y + 20  > this.y ){
-        player.resetPosition();
-    }
-
+    checkCollisions();
 
 };
 
