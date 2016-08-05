@@ -1,36 +1,99 @@
+var height = 83,
+    width = 101;
+    defaultPlayerX = width  * 2
+    defaultPlayerY = height * 5;
 // Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+var Enemy = function(speed,x,y) {
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.x = x || 0;
+    this.y = y || 0;
+    this.speed = speed || 1;
+
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    this.x  = this.x + ( this.speed * dt );
+    // [TODO] handle colision with Player
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x  , this.y  );
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
 
+var Player = function (speed,x_def,y_def,x_min,y_min,x_max,y_max,mode) {
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+    this.sprite = 'images/char-boy.png';
+    this.x_def = x_def || 0;
+    this.y_def = y_def || 0;
+    this.x_min = x_min || 0 ;
+    this.y_min = x_min || 0 ;
 
+    this.x_max = x_max || 1000 ;
+    this.y_max = y_max || 1000 ;
 
+    this.x = this.x_def;
+    this.y = this.y_def;
+
+    this.speed = speed || 1;
+    this.x_speed = 0;
+    this.y_speed = 0;
+    this.handle = "";
+    
+    // console.dir(this.x);
+}
+
+Player.prototype.update = function(dt) {
+
+    if (typeof dt !== 'number'){
+       dt = 1;
+    }
+    this.x  = this.x +  this.x_speed * dt;
+    this.y  = this.y +  this.y_speed * dt;
+
+    if ( this.y <  height ){
+      this.resetPosition();
+    };
+
+};
+
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x , this.y);
+};
+
+Player.prototype.handleInput = function (code) {
+  if ( typeof code === 'string'){
+    if ( code === 'left' || code === 'up' )  {
+      this.speed = Math.abs(this.speed) * -1;
+    } else if ( code === 'right' || code === 'right' ) {
+      this.speed = Math.abs(this.speed);
+    }
+
+    if ( code === 'left' || code === 'right' )  {
+      this.x_speed = this.speed;
+      this.y_speed = 0;
+    }else if ( code === 'up' || code === 'down' ) {
+      this.x_speed = 0;
+      this.y_speed = this.speed;
+    }
+  }
+};
+
+Player.prototype.resetPosition = function () {
+    this.x = this.x_def;
+    this.y = this.y_def;
+    this.handle = "";
+};
+
+var allEnemies = [];
+
+allEnemies.push(new Enemy(50,  - width , 0 ));
+allEnemies.push(new Enemy(100, - width,height ));
+allEnemies.push(new Enemy(150, - width,height * 2 ));
+allEnemies.push(new Enemy(150, - width,height * 3 ));
+var player = new Player(4,defaultPlayerX,defaultPlayerY,0,0,415,415);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -41,6 +104,5 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
