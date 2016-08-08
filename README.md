@@ -1,6 +1,20 @@
 frontend-nanodegree-arcade-game
 ===============================
+this is a simple game for udacity frontend-nanodefree program.
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+# Installation
+download zip and extract them or clone it by following the command bellow.
+ `$ git clone git@github.com:masterkuzutt/frontend-nanodegree-arcade-game.git`
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+After unzipping or cloning, open **index.html** file on your browser.
+
+_You don't need to be run on web server.All the contents are included._
+
+# How to Play
+Using  cursor movement keys,point the direction of player character to move.
+
+# How to customize
+## Player
+if you want to change the speed of player, change below in app.js.
+
+`playerSpeed = 3;`
