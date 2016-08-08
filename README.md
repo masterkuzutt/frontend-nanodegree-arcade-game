@@ -11,7 +11,7 @@ After unzipping or cloning, open **index.html** file on your browser.
 _You don't need to be run on web server.All the contents are included._
 
 # How to Play
-Make player ｒａｃｈｉｎｇ ｔｏ ｔｈｅ ｗａｔｅｒ ｂｙ not encountering emenies.
+Make player reaching to the water by not  encountering emenies.
 Using cursor movement keys,point the direction to move.
 
 # How to customize
